@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
 const LINKEDIN_POSTS_URL = "https://api.linkedin.com/rest/posts";
-const LINKEDIN_VERSION = "202502";
+const LINKEDIN_VERSION = "202401";
 
 function escapeCommentary(text: string): string {
   return text.replace(/([\\{}@\[\]()<>#*_~])/g, "\\$1");
