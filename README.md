@@ -58,3 +58,23 @@ An **agentic AI** app that lets you research a topic, get a structured summary a
 - OpenAI API (gpt-4o-mini)
 - Optional: Tavily Search API
 - Tailwind CSS
+
+# Snapshots of working locally
+
+<img width="1224" height="516" alt="image" src="https://github.com/user-attachments/assets/69c8231a-56cc-4d4f-874f-af4bff726a79" />
+
+### Research Summary 
+
+<img width="906" height="681" alt="image" src="https://github.com/user-attachments/assets/9be58243-3ccc-4f66-a894-c6aec6c8478d" />
+
+#### Edit your LinkedInPost 
+
+<img width="965" height="622" alt="image" src="https://github.com/user-attachments/assets/1f63145f-c942-4f1e-b7a0-1d815d586b03" />
+
+#### Save you LinkedIn Post 
+
+<img width="930" height="199" alt="image" src="https://github.com/user-attachments/assets/5341976e-7662-493b-aa51-3378f4d6f20d" />
+
+
+
+
