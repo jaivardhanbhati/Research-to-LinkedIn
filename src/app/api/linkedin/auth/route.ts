@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const LINKEDIN_AUTH_URL = "https://www.linkedin.com/oauth/v2/authorization";
-const SCOPES = "w_member_social";
+const SCOPES = "r_basicprofile w_member_social";
 
 export async function GET(req: NextRequest) {
   const clientId = process.env.LINKEDIN_CLIENT_ID;
