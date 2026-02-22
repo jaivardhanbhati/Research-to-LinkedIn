@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { SavedPost } from "@/types";
 
 const LINKEDIN_POST_URL = "https://www.linkedin.com/feed/";
@@ -18,6 +18,34 @@ export default function Home() {
   const [showResearch, setShowResearch] = useState(true);
   const [copied, setCopied] = useState(false);
   const [savedId, setSavedId] = useState<string | null>(null);
+  const [linkedinConnected, setLinkedinConnected] = useState<boolean | null>(null);
+  const [publishLoading, setPublishLoading] = useState(false);
+  const [publishedSuccess, setPublishedSuccess] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/linkedin/status", { credentials: "include" })
+      .then((r) => r.json())
+      .then((data) => {
+        setLinkedinConnected(data.connected === true);
+      })
+      .catch(() => setLinkedinConnected(false));
+  }, []);
+
+  useEffect(() => {
+    const params = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
+    const linkedin = params?.get("linkedin");
+    if (linkedin === "connected") {
+      setLinkedinConnected(true);
+      setError("");
+      window.history.replaceState({}, "", window.location.pathname);
+    } else if (linkedin === "denied" || linkedin === "error") {
+      setError("LinkedIn connection was cancelled or failed.");
+      window.history.replaceState({}, "", window.location.pathname);
+    } else if (linkedin === "config" || linkedin === "token" || linkedin === "profile") {
+      setError("LinkedIn connection failed. Check app configuration.");
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, []);
 
   async function handleResearch() {
     if (!topic.trim()) {
@@ -119,6 +147,40 @@ export default function Home() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
+  }
+
+  async function handlePublishToLinkedIn() {
+    if (!draft.trim()) {
+      setError("Draft is empty.");
+      return;
+    }
+    setError("");
+    setPublishedSuccess(false);
+    setPublishLoading(true);
+    try {
+      const res = await fetch("/api/linkedin/publish", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ content: draft }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        if (res.status === 401) setLinkedinConnected(false);
+        throw new Error(data.error || "Publish failed");
+      }
+      setPublishedSuccess(true);
+      setTimeout(() => setPublishedSuccess(false), 5000);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Publish failed");
+    } finally {
+      setPublishLoading(false);
+    }
+  }
+
+  async function handleDisconnectLinkedIn() {
+    await fetch("/api/linkedin/disconnect", { method: "POST", credentials: "include" });
+    setLinkedinConnected(false);
   }
 
   function downloadExport() {
@@ -279,30 +341,57 @@ export default function Home() {
               >
                 Download JSON
               </button>
+              {linkedinConnected ? (
+                <>
+                  <button
+                    onClick={handlePublishToLinkedIn}
+                    disabled={publishLoading}
+                    className="rounded-lg bg-[#0A66C2] px-4 py-2 font-medium text-white transition hover:bg-[#004182] disabled:opacity-60"
+                  >
+                    {publishLoading ? "Publishing…" : publishedSuccess ? "Published!" : "Publish to LinkedIn"}
+                  </button>
+                  <button
+                    onClick={handleDisconnectLinkedIn}
+                    className="rounded-lg border border-stone-300 bg-white px-4 py-2 text-sm font-medium text-stone-600 transition hover:bg-stone-100"
+                  >
+                    Disconnect
+                  </button>
+                </>
+              ) : (
+                <a
+                  href="/api/linkedin/auth"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[#0A66C2] px-4 py-2 font-medium text-white transition hover:bg-[#004182]"
+                >
+                  Connect LinkedIn
+                </a>
+              )}
               <button
                 onClick={handleCopy}
-                className="rounded-lg bg-[#0A66C2] px-4 py-2 font-medium text-white transition hover:bg-[#004182]"
+                className="rounded-lg border border-stone-300 bg-white px-4 py-2 font-medium text-stone-700 transition hover:bg-stone-100"
               >
-                {copied ? "Copied!" : "Copy for LinkedIn"}
+                {copied ? "Copied!" : "Copy"}
               </button>
               <a
                 href={LINKEDIN_POST_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg bg-[#0A66C2] px-4 py-2 font-medium text-white transition hover:bg-[#004182]"
+                className="inline-flex items-center gap-2 rounded-lg border border-stone-300 bg-white px-4 py-2 font-medium text-stone-700 transition hover:bg-stone-100"
               >
                 Open LinkedIn
                 <span className="text-sm opacity-80">↗</span>
               </a>
             </div>
-            {savedId && (
-              <p className="mt-3 text-sm text-stone-600">Saved. Paste your post in LinkedIn after opening.</p>
+            {publishedSuccess && (
+              <p className="mt-3 text-sm font-medium text-green-700">Post published to your LinkedIn feed.</p>
+            )}
+            {savedId && !publishedSuccess && (
+              <p className="mt-3 text-sm text-stone-600">Saved. Connect LinkedIn to publish with one click.</p>
             )}
           </section>
         )}
 
         <footer className="text-center text-sm text-stone-500">
-          Paste your post in LinkedIn after clicking “Copy for LinkedIn” or “Open LinkedIn”.
+          Connect LinkedIn to publish with one click. Otherwise use Copy and paste in LinkedIn.
         </footer>
       </div>
     </div>
