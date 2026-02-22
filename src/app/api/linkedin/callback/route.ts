@@ -55,11 +55,14 @@ export async function GET(req: NextRequest) {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
   if (!meRes.ok) {
+    const profileErr = await meRes.text();
+    console.error("LinkedIn /v2/me failed:", meRes.status, profileErr);
     return NextResponse.redirect(`${appOrigin}?linkedin=profile`);
   }
   const me = await meRes.json();
   const personId = me.id;
   if (!personId) {
+    console.error("LinkedIn /v2/me missing id:", JSON.stringify(me));
     return NextResponse.redirect(`${appOrigin}?linkedin=profile`);
   }
 
