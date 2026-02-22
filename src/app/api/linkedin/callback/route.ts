@@ -47,6 +47,7 @@ export async function GET(req: NextRequest) {
 
   const tokenData = await tokenRes.json();
   const accessToken = tokenData.access_token;
+  sessionStorage.setItem("linkedin_access_token", accessToken); // Store token in sessionStorage for client-side use
   if (!accessToken) {
     return NextResponse.redirect(`${appOrigin}?linkedin=token`);
   }
