@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Research → LinkedIn",
+  title: "LinkedIn Post Publisher",
   description: "Agentic AI: research any topic, get a draft, edit, and publish to LinkedIn",
 };
 
