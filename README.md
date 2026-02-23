@@ -1,4 +1,4 @@
-# Research → LinkedIn
+# LinkedIn Post Helper Agent
 
 An **agentic AI** app that lets you research a topic, get a structured summary and a LinkedIn post draft, edit it with your own input (and AI refinement), then save or publish to LinkedIn.
 
