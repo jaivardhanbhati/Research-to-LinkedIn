@@ -61,19 +61,23 @@ An **agentic AI** app that lets you research a topic, get a structured summary a
 
 # Snapshots of working locally
 
-<img width="1224" height="516" alt="image" src="https://github.com/user-attachments/assets/69c8231a-56cc-4d4f-874f-af4bff726a79" />
+<img width="1115" height="425" alt="image" src="https://github.com/user-attachments/assets/5ec477ff-5293-40aa-8557-5afbc91ff140" />
+
 
 ### Research Summary 
 
-<img width="906" height="681" alt="image" src="https://github.com/user-attachments/assets/9be58243-3ccc-4f66-a894-c6aec6c8478d" />
+<img width="864" height="868" alt="image" src="https://github.com/user-attachments/assets/5c5ad09c-929a-4e77-a97e-4e4ff7f967d9" />
+
 
 #### Edit your LinkedInPost 
 
-<img width="965" height="622" alt="image" src="https://github.com/user-attachments/assets/1f63145f-c942-4f1e-b7a0-1d815d586b03" />
+<img width="779" height="504" alt="image" src="https://github.com/user-attachments/assets/da69cc05-d7a0-4686-8014-d237546aa9e9" />
+
 
 #### Save you LinkedIn Post 
 
-<img width="930" height="199" alt="image" src="https://github.com/user-attachments/assets/5341976e-7662-493b-aa51-3378f4d6f20d" />
+<img width="798" height="222" alt="image" src="https://github.com/user-attachments/assets/4098fcb7-1af7-4a2d-b725-1fe6578a3e75" />
+
 
 
 
