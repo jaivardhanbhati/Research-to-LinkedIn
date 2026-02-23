@@ -276,7 +276,7 @@ export default function Home() {
                   value={research}
                   onChange={(e) => setResearch(e.target.value)}
                   rows={14}
-                  className="mb-4 w-full resize-y rounded-lg border border-stone-300 bg-stone-50 px-4 py-3 text-stone-900 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                  className="mb-4 w-full resize-y rounded-lg border border-stone-300 bg-stone-50 px-4 py-3 text-stone-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   placeholder="Research summary..."
                 />
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -286,7 +286,7 @@ export default function Home() {
                     onChange={(e) => setResearchFeedback(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleRefineResearch()}
                     placeholder="e.g. Add more statistics, shorten, focus on X..."
-                    className="flex-1 rounded-lg border border-stone-300 bg-stone-50 px-4 py-2 text-stone-900 placeholder-stone-400 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                    className="flex-1 rounded-lg border border-stone-300 bg-stone-50 px-4 py-2 text-stone-900 placeholder-stone-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
                   <button
                     onClick={handleRefineResearch}
@@ -311,7 +311,7 @@ export default function Home() {
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
               rows={12}
-              className="mb-4 w-full resize-y rounded-lg border border-stone-300 bg-stone-50 px-4 py-3 text-stone-900 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+              className="mb-4 w-full resize-y rounded-lg border border-stone-300 bg-stone-50 px-4 py-3 text-stone-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               placeholder="Your LinkedIn post draft..."
             />
 
@@ -322,7 +322,7 @@ export default function Home() {
                 onChange={(e) => setFeedback(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleRefine()}
                 placeholder="e.g. Make it shorter, add a CTA..."
-                className="flex-1 rounded-lg border border-stone-300 bg-stone-50 px-4 py-2 text-stone-900 placeholder-stone-400 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                className="flex-1 rounded-lg border border-stone-300 bg-stone-50 px-4 py-2 text-stone-900 placeholder-stone-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
               <button
                 onClick={handleRefine}
@@ -357,27 +357,13 @@ export default function Home() {
               {linkedinConnected ? (
                 <>
                   <button
-                    onClick={handlePublishToLinkedIn}
-                    disabled={publishLoading}
-                    className="rounded-lg bg-[#0A66C2] px-4 py-2 font-medium text-white transition hover:bg-[#004182] disabled:opacity-60"
-                  >
-                    {publishLoading ? "Publishing…" : publishedSuccess ? "Published!" : "Publish to LinkedIn"}
-                  </button>
-                  <button
                     onClick={handleDisconnectLinkedIn}
                     className="rounded-lg border border-stone-300 bg-white px-4 py-2 text-sm font-medium text-stone-600 transition hover:bg-stone-100"
                   >
                     Disconnect
                   </button>
                 </>
-              ) : (
-                <a
-                  href="/api/linkedin/auth"
-                  className="inline-flex items-center gap-2 rounded-lg bg-[#0A66C2] px-4 py-2 font-medium text-white transition hover:bg-[#004182]"
-                >
-                  Connect LinkedIn
-                </a>
-              )}
+              ) : null}
               <button
                 onClick={handleCopy}
                 className="rounded-lg border border-stone-300 bg-white px-4 py-2 font-medium text-stone-700 transition hover:bg-stone-100"
@@ -393,6 +379,22 @@ export default function Home() {
                 Open LinkedIn
                 <span className="text-sm opacity-80">↗</span>
               </a>
+              {linkedinConnected ? (
+                <button
+                  onClick={handlePublishToLinkedIn}
+                  disabled={publishLoading}
+                  className="rounded-lg bg-[#0A66C2] px-4 py-2 font-medium text-white transition hover:bg-[#004182] disabled:opacity-60"
+                >
+                  {publishLoading ? "Publishing…" : publishedSuccess ? "Published!" : "Publish to LinkedIn"}
+                </button>
+              ) : (
+                <a
+                  href="/api/linkedin/auth"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[#0A66C2] px-4 py-2 font-medium text-white transition hover:bg-[#004182]"
+                >
+                  Publish to LinkedIn
+                </a>
+              )}
             </div>
             {publishedSuccess && (
               <p className="mt-3 text-sm font-medium text-green-700">Post published to your LinkedIn feed.</p>
