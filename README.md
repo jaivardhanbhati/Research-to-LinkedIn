@@ -29,7 +29,7 @@ An **agentic AI** app that lets you research a topic, get a structured summary a
 
    - **OPENAI_API_KEY** (required) – Used for research synthesis and draft/refine. Get one at [platform.openai.com](https://platform.openai.com).
    - **TAVILY_API_KEY** (optional) – For web search. Free tier at [tavily.com](https://tavily.com). Without it, the app uses the model’s built-in knowledge only.
-   - **LINKEDIN_CLIENT_ID** and **LINKEDIN_CLIENT_SECRET** and ***LINKEDIN_REDIRECT_URI*** – For one-click publish. Create an app at [LinkedIn Developers](https://www.linkedin.com/developers/apps), add the “Share on LinkedIn” product, and set the redirect URL to `https://your-domain/api/linkedin/callback` (e.g. `http://https://publish-to-linkedin.vercel.app/api/linkedin/callback`).
+   - **LINKEDIN_CLIENT_ID** and **LINKEDIN_CLIENT_SECRET** and ***LINKEDIN_REDIRECT_URI*** – For one-click publish. Create an app at [LinkedIn Developers](https://www.linkedin.com/developers/apps), add the “Share on LinkedIn” product, and set the redirect URL to `https://your-domain/api/linkedin/callback` (e.g. `https://publish-to-linkedin.vercel.app/api/linkedin/callback`).
 
 3. **Run the app**
 
