@@ -53,7 +53,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.redirect(`${appOrigin}?linkedin=token`);
   }
 
-  const meRes = await fetch("https://api.linkedin.com/v2/userinfo", {
+  const meRes = await fetch("https://api.linkedin.com/v2/me", {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
   if (!meRes.ok) {
