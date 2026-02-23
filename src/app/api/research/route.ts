@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
 
     // Agent step 2: Synthesize research
     const researchResponse = await openai.chat.completions.create({
-      model: "gpt-5-mini",
+      model: "gpt-4.1-mini",
       messages: [
         {
           role: "system",
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
 
     // Agent step 3: Create LinkedIn post draft
     const draftResponse = await openai.chat.completions.create({
-      model: "gpt-5-mini",
+      model: "gpt-4.1-mini",
       messages: [
         {
           role: "system",
