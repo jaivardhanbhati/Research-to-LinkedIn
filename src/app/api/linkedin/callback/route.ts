@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
+
 const LINKEDIN_TOKEN_URL = "https://www.linkedin.com/oauth/v2/accessToken";
 
 export async function GET(req: NextRequest) {
@@ -47,7 +48,7 @@ export async function GET(req: NextRequest) {
 
   const tokenData = await tokenRes.json();
   const accessToken = tokenData.access_token;
-  sessionStorage.setItem("linkedin_access_token", accessToken); // Store token in sessionStorage for client-side use
+  
   if (!accessToken) {
     return NextResponse.redirect(`${appOrigin}?linkedin=token`);
   }

@@ -226,12 +226,12 @@ export default function Home() {
               onChange={(e) => setTopic(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleResearch()}
               placeholder="e.g. AI in healthcare, remote work trends..."
-              className="flex-1 rounded-lg border border-stone-300 bg-stone-50 px-4 py-3 text-stone-900 placeholder-stone-400 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+              className="flex-1 rounded-lg border border-stone-300 bg-stone-50 px-4 py-3 text-stone-900 placeholder-stone-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
             <button
               onClick={handleResearch}
               disabled={loading}
-              className="rounded-lg bg-amber-600 px-5 py-3 font-medium text-white transition hover:bg-amber-700 disabled:opacity-60"
+              className="rounded-lg bg-[#0A66C2] px-5 py-3 font-medium text-white transition hover:bg-[#0A66C2] disabled:opacity-60"
             >
               {loading ? "Researching…" : "Research"}
             </button>
